@@ -12,7 +12,7 @@ var rabbitmq = builder
 
 var mcpServer = builder
     .AddProject<Projects.MCP_Server>("mcp");
-    
+
 var agent = builder
     .AddPythonApp("agent", "../Services/Agent", "main.py")
     .WithUv()
