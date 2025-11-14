@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.MongoDB.Driver" Version="13.0.0" />
+      <PackageReference Include="NetCord" Version="1.0.0-alpha.448" />
+      <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.448" />
+      <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.448" />
+      <PackageReference Include="NetCord.Services" Version="1.0.0-alpha.448" />
+      <PackageReference Include="WolverineFx" Version="5.2.0" />
+      <PackageReference Include="WolverineFx.RabbitMQ" Version="5.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Bot.Core\Bot.Core.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AppHost/AppHost.csproj" />
+    <Project Path="src/ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/Common/Common.csproj" />
+    <Project Path="src/BuildingBlocks/Contracts/Contracts.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/Bot/">
+    <Project Path="src/Services/Bot/Bot.Application/Bot.Application.csproj" />
+    <Project Path="src/Services/Bot/Bot.Core/Bot.Core.csproj" />
+    <Project Path="src/Services/Bot/Bot.Gateway/Bot.Gateway.csproj" />
+    <Project Path="src/Services/Bot/Bot.Infrastructure/Bot.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/MCP/">
+    <Project Path="src/Services/MCP/MCP.Server/MCP.Server.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>
