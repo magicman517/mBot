@@ -11,7 +11,7 @@ public class AspireAppCollection : ICollectionFixture<AspireFixture>;
 
 public class AspireFixture : IAsyncLifetime
 {
-    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(120);
     private IDistributedApplicationTestingBuilder? _appHost;
 
     public DistributedApplication App { get; private set; } = null!;

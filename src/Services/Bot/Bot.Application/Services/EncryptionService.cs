@@ -40,7 +40,7 @@ public class EncryptionService : IEncryptionService
         var encryptedString = Convert.ToBase64String(encryptedBytes);
         var ivString = Convert.ToBase64String(aes.IV);
         
-        return $"{ivString}{Separator}{encryptedString}";
+        return $"{encryptedString}{Separator}{ivString}";
     }
 
     public string Decrypt(string combinedText)
