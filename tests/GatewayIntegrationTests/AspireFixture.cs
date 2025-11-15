@@ -42,7 +42,6 @@ public class AspireFixture : IAsyncLifetime
         });
 
         testHostBuilder.Configuration["Encryption:Key"] = "Iy+Y5F3IgCNUlY6st7sJhmzK3Wt6n6d9OV9rrDOsYgg=";
-        testHostBuilder.Configuration["Encryption:IV"] = "Hhnaon4yvrkgKi67atM5WQ==";
 
         var mongodbConnectionString = await App.GetConnectionStringAsync("mongodb");
         var rabbitmqConnectionString = await App.GetConnectionStringAsync("rabbitmq");
