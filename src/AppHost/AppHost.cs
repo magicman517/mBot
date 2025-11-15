@@ -10,13 +10,14 @@ var rabbitmq = builder
     .WithManagementPlugin()
     .WithDataVolume();
 
-var mcpServer = builder
-    .AddProject<Projects.MCP_Server>("mcp");
+var mcp = builder
+    .AddProject<Projects.MCP_Server>("mcp")
+    .WithHttpHealthCheck("/healthz");
 
 var agent = builder
     .AddPythonApp("agent", "../Services/Agent", "main.py")
     .WithUv()
-    .WithEnvironment("ConnectionStrings__mcp", mcpServer.GetEndpoint("http"))
+    .WithEnvironment("ConnectionStrings__mcp", mcp.GetEndpoint("http"))
     .WithReference(rabbitmq)
     .WaitFor(rabbitmq);
 
