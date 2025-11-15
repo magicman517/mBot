@@ -24,14 +24,14 @@ public class ChatEvent(GatewayClient gatewayClient, IServiceProvider serviceProv
             || message.Guild is null
             || message.Author is not GuildUser user)
         {
-            logger.LogInformation("Ignoring message from {User} in guild {Guild}",
+            logger.LogDebug("Ignoring message from {User} in guild {Guild}",
                 message.Author.Id, message.GuildId);
             return;
         }
 
         if (!message.Content.StartsWith(_mention, StringComparison.Ordinal))
         {
-            logger.LogInformation("Ignoring message from {User} in guild {Guild} as it does not mention the bot",
+            logger.LogDebug("Ignoring message from {User} in guild {Guild} as it does not mention the bot",
                 user.Id, message.Guild.Id);
             return;
         }
@@ -41,7 +41,7 @@ public class ChatEvent(GatewayClient gatewayClient, IServiceProvider serviceProv
             : string.Empty;
         if (string.IsNullOrEmpty(prompt))
         {
-            logger.LogInformation("Ignoring message from {User} in guild {Guild} as it contains no prompt", user.Id,
+            logger.LogDebug("Ignoring message from {User} in guild {Guild} as it contains no prompt", user.Id,
                 message.Guild.Id);
             await message.AddReactionAsync("❓");
             return;

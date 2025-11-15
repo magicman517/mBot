@@ -17,5 +17,7 @@
   <Folder Name="/src/Services/MCP/">
     <Project Path="src/Services/MCP/MCP.Server/MCP.Server.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests\GatewayIntegrationTests\GatewayIntegrationTests.csproj" />
+  </Folder>
 </Solution>

@@ -9,4 +9,6 @@ var app = builder.Build();
 
 app.MapMcp();
 
+app.Map("/healthz", () => Results.Ok());
+
 await app.RunAsync();

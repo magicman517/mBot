@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace Bot.Infrastructure.Services;
 
-public class GuildService(IGuildRepository repository, ILogger<GuildService> logger) : IGuildService
+public class GuildService(IGuildRepository repository, IEncryptionService encryptionService, ILogger<GuildService> logger) : IGuildService
 {
     public async Task<Guild?> GetGuildAsync(ulong id, CancellationToken ct = default)
     {
@@ -42,7 +42,11 @@ public class GuildService(IGuildRepository repository, ILogger<GuildService> log
     public async Task UpdateAgentConfigurationAsync(ulong id, Provider? provider, string? model, string? apiKey,
         CancellationToken ct = default)
     {
-        // TODO: encrypt apiKey before storing
+        if (!string.IsNullOrEmpty(apiKey))
+        {
+            apiKey = encryptionService.Encrypt(apiKey);
+        }
+        
         await repository.UpdateAsync(id, u =>
         {
             var updates = new List<UpdateDefinition<Guild>>();

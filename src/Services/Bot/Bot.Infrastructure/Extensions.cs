@@ -22,15 +22,15 @@ public static class Extensions
 {
     public static void AddInfrastructure(this IHostApplicationBuilder builder)
     {
-        builder.AddMongoDBClient("mongodb");
+        if (builder.Environment.EnvironmentName != "Testing")
+        {
+            builder.Services.AddDiscordGateway(options => { options.Intents = GatewayIntents.All; })
+                .AddGatewayHandlers(Assembly.GetCallingAssembly())
+                .AddApplicationCommands()
+                .AddComponentInteractions<ModalInteraction, ModalInteractionContext>();
+        }
 
-        builder.Services.AddDiscordGateway(options =>
-            {
-                options.Intents = GatewayIntents.All;
-            })
-            .AddGatewayHandlers(Assembly.GetCallingAssembly())
-            .AddApplicationCommands()
-            .AddComponentInteractions<ModalInteraction, ModalInteractionContext>();
+        builder.AddMongoDBClient("mongodb");
         
         builder.UseWolverine(options =>
         {
