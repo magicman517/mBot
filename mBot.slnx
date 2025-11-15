@@ -14,9 +14,6 @@
     <Project Path="src/Services/Bot/Bot.Gateway/Bot.Gateway.csproj" />
     <Project Path="src/Services/Bot/Bot.Infrastructure/Bot.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/src/Services/MCP/">
-    <Project Path="src/Services/MCP/MCP.Server/MCP.Server.csproj" />
-  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests\GatewayIntegrationTests\GatewayIntegrationTests.csproj" />
   </Folder>

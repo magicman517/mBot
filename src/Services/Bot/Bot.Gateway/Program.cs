@@ -4,14 +4,18 @@ using Bot.Infrastructure;
 using NetCord.Hosting.Services;
 using ServiceDefaults;
 
-var builder = Host.CreateApplicationBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 builder.AddApplication();
 builder.AddInfrastructure();
 
-var host = builder.Build();
+var app = builder.Build();
 
-host.AddModules(Assembly.GetExecutingAssembly());
+app.AddModules(Assembly.GetExecutingAssembly());
 
-await host.RunAsync();
+app.MapMcp();
+
+app.MapGet("/healthz", () => Results.Ok());
+
+await app.RunAsync();

@@ -13,6 +13,7 @@ public class Configuration : ApplicationCommandModule<ApplicationCommandContext>
     [SubSlashCommand("get", "Get the current agent configuration")]
     public string GetConfiguration()
     {
+        // TODO fetch and display configuration
         return "WIP";
     }
 
@@ -21,6 +22,7 @@ public class Configuration : ApplicationCommandModule<ApplicationCommandContext>
     [SubSlashCommand("set", "Update the agent configuration")]
     public string SetConfiguration()
     {
+        // TODO send modal
         return "WIP";
     }
 }

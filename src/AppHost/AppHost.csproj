@@ -10,7 +10,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Services\Bot\Bot.Gateway\Bot.Gateway.csproj" />
-      <ProjectReference Include="..\Services\MCP\MCP.Server\MCP.Server.csproj" />
     </ItemGroup>
 
     <ItemGroup>
