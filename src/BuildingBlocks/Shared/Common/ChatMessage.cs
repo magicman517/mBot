@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Common;
+namespace Shared.Common;
 
 /// <summary>
 /// Represents a message in a chat conversation with a role and content

@@ -3,7 +3,6 @@ using Bot.Core.Interfaces.Repositories;
 using Bot.Core.Interfaces.Services;
 using Bot.Infrastructure.Repositories;
 using Bot.Infrastructure.Services;
-using Contracts;
 using JasperFx.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +12,7 @@ using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.ComponentInteractions;
 using NetCord.Services.ComponentInteractions;
+using Shared.Contracts;
 using Wolverine;
 using Wolverine.RabbitMQ;
 

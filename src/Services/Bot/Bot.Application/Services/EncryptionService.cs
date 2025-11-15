@@ -49,7 +49,7 @@ public class EncryptionService : IEncryptionService
         
         var parts = combinedText.Split(Separator);
         if (parts.Length != 2)
-            throw new FormatException("Input text is not in the expected format [encrypted]:[iv]");
+            throw new FormatException("Input text is not in the expected format [encrypted]::[iv]");
         
         var cipherText = parts[0];
         var ivText = parts[1];

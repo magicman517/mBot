@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using Common;
+using Shared.Common;
 
-namespace Contracts;
+namespace Shared.Contracts;
 
 /// <summary>
 /// Contract for initiating an agent interaction in response to a user message
