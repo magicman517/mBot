@@ -7,12 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2025.2.2" />
       <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.0" />
       <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.4.0-preview.3" />
+      <PackageReference Include="NetCord" Version="1.0.0-alpha.448" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Bot.Core\Bot.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="MCPTools\Modules\" />
     </ItemGroup>
 
 </Project>
