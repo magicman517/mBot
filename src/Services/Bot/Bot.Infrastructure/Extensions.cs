@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using Bot.Core.Interfaces.Repositories;
 using Bot.Core.Interfaces.Services;
+using Bot.Infrastructure.ChannelPool;
+using Bot.Infrastructure.Consumers;
 using Bot.Infrastructure.Repositories;
 using Bot.Infrastructure.Services;
-using JasperFx.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetCord;
@@ -12,9 +13,6 @@ using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services.ApplicationCommands;
 using NetCord.Hosting.Services.ComponentInteractions;
 using NetCord.Services.ComponentInteractions;
-using Shared.Contracts;
-using Wolverine;
-using Wolverine.RabbitMQ;
 
 namespace Bot.Infrastructure;
 
@@ -31,21 +29,17 @@ public static class Extensions
         }
 
         builder.AddMongoDBClient("mongodb");
-        
-        builder.UseWolverine(options =>
-        {
-            options
-                .UseRabbitMqUsingNamedConnection("rabbitmq")
-                .DisableDeadLetterQueueing()
-                .AutoProvision();
+        builder.AddRabbitMQClient("rabbitmq");
 
-            options.PublishMessage<StartAgentContract>()
-                .ToRabbitExchange("agent.tasks", cfg => { cfg.BindQueue("agent.start"); });
+        builder.Services.AddSingleton<IAsyncChannelPool, AsyncChannelPool>();
+        builder.Services.AddSingleton<IPublisherService, PublisherService>();
 
-            options.Services.AddResourceSetupOnStartup();
-        });
+        builder.Services.AddHostedService<AgentChunkConsumer>();
+        builder.Services.AddHostedService<AgentResultConsumer>();
+        builder.Services.AddHostedService<AgentErrorConsumer>();
 
         builder.Services.AddSingleton<IGuildRepository, GuildRepository>();
         builder.Services.AddSingleton<IGuildService, GuildService>();
+        builder.Services.AddSingleton<IChatService, ChatService>();
     }
 }

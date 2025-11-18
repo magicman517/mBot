@@ -2,6 +2,8 @@ import asyncio
 import logging
 import sys
 
+# discovery
+import services.consumers.agent_start_consumer
 from services.broker import app
 
 logger: logging.Logger = logging.getLogger(__name__)
@@ -13,6 +15,8 @@ def configure_logging() -> None:
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("mcp.client.streamable_http").setLevel(logging.WARNING)
 
 
 async def main() -> None:

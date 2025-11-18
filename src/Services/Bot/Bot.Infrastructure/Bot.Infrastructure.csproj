@@ -8,12 +8,12 @@
 
     <ItemGroup>
       <PackageReference Include="Aspire.MongoDB.Driver" Version="13.0.0" />
+      <PackageReference Include="Aspire.RabbitMQ.Client" Version="13.0.0" />
+      <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="10.0.0" />
       <PackageReference Include="NetCord" Version="1.0.0-alpha.448" />
       <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.448" />
       <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.448" />
       <PackageReference Include="NetCord.Services" Version="1.0.0-alpha.448" />
-      <PackageReference Include="WolverineFx" Version="5.2.0" />
-      <PackageReference Include="WolverineFx.RabbitMQ" Version="5.2.0" />
     </ItemGroup>
 
     <ItemGroup>

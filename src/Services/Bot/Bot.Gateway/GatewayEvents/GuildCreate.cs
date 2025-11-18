@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
 
-namespace Bot.Gateway.Events;
+namespace Bot.Gateway.GatewayEvents;
 
 [UsedImplicitly]
 public class GuildCreate(IGuildService guildService) : IGuildCreateGatewayHandler
