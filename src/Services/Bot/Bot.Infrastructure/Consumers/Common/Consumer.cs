@@ -1,16 +1,20 @@
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NetCord;
+using NetCord.Rest;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Shared.Common;
 
 namespace Bot.Infrastructure.Consumers.Common;
 
-public abstract class Consumer<T>(IConnection connection) : BackgroundService
+public abstract class Consumer<T>(IConnection connection, ILogger logger) : BackgroundService
 {
-    public string? ExchangeName { get; protected set; }
-    public string? QueueName { get; protected set; }
-    public string? RoutingKey { get; protected set; }
+    protected string? ExchangeName { get; set; }
+    protected string? QueueName { get; set; }
+    protected string? RoutingKey { get; set; }
 
     private IChannel? _channel;
     
@@ -84,8 +88,8 @@ public abstract class Consumer<T>(IConnection connection) : BackgroundService
     private void ValidateConfiguration()
     {
         if (string.IsNullOrWhiteSpace(ExchangeName)
-            && string.IsNullOrWhiteSpace(QueueName)
-            && string.IsNullOrWhiteSpace(RoutingKey))
+            || string.IsNullOrWhiteSpace(QueueName)
+            || string.IsNullOrWhiteSpace(RoutingKey))
             throw new InvalidOperationException("Invalid consumer configuration");
     }
 }

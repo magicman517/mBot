@@ -7,24 +7,24 @@ namespace Bot.Infrastructure.Services;
 
 public class PublisherService(IAsyncChannelPool asyncChannelPool) : IPublisherService
 {
-    private readonly BasicProperties _properties = new()
-    {
-        ContentType = "application/json",
-        DeliveryMode = DeliveryModes.Persistent
-    };
-    
     public async Task PublishAsync<T>(string exchange, string routingKey, T message, CancellationToken ct = default)
     {
         var channel = await asyncChannelPool.GetChannelAsync(ct);
         try
         {
             var body = JsonSerializer.SerializeToUtf8Bytes(message);
+            
+            var properties = new BasicProperties
+            {
+                ContentType = "application/json",
+                DeliveryMode = DeliveryModes.Persistent
+            };
 
             await channel.BasicPublishAsync(
                 exchange: exchange,
                 routingKey: routingKey,
                 mandatory: false,
-                basicProperties: _properties,
+                basicProperties: properties,
                 body: body,
                 cancellationToken: ct);
         }

@@ -10,21 +10,26 @@ namespace Bot.Infrastructure.Services;
 public class ChatService(GatewayClient gatewayClient, IPublisherService publisherService) : IChatService
 {
     private readonly string _mention = $"<@{gatewayClient.Id}>";
-    
-    private string StripMention(string content) => content[_mention.Length..].Trim();
-    
+
+    private string StripMention(string content)
+    {
+        return !content.StartsWith(_mention, StringComparison.OrdinalIgnoreCase)
+            ? content
+            : content[_mention.Length..].Trim();
+    }
+
     public async Task StartAgentAsync(Message message, TextChannel? textChannel, CancellationToken ct = default)
     {
         if (textChannel is null)
             return;
-        
+
         var prompt = StripMention(message.Content);
         if (string.IsNullOrWhiteSpace(prompt))
         {
             await message.AddReactionAsync("❓", cancellationToken: ct);
             return;
         }
-        
+
         await message.AddReactionAsync("👀", cancellationToken: ct);
 
         var chatContext = new ChatContext

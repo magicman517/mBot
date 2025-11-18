@@ -72,7 +72,7 @@ def get_instruction(
 
     if referenced_message:
         referenced_info = (
-            f"\n**Used referenced this message (replying to), use it if needed:**\n"
+            f"\n**User referenced this message (replying to), use it if needed:**\n"
             f"Message ID: {referenced_message.id}\n"
             f"Content: {referenced_message.content}"
         )

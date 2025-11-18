@@ -4,13 +4,12 @@ using NetCord;
 using NetCord.Gateway;
 using NetCord.Rest;
 using RabbitMQ.Client;
-using Shared.Common;
 using Shared.Contracts;
 
 namespace Bot.Infrastructure.Consumers;
 
 public class AgentChunkConsumer(IConnection connection, ILogger<AgentChunkConsumer> logger, GatewayClient gatewayClient)
-    : Consumer<AgentChunkContract>(connection)
+    : DiscordConsumer<AgentChunkContract>(connection, logger, gatewayClient)
 {
     protected override void Configure()
     {
@@ -38,24 +37,5 @@ public class AgentChunkConsumer(IConnection connection, ILogger<AgentChunkConsum
             Content = body.Content,
             Flags = MessageFlags.SuppressNotifications
         }, cancellationToken: ct);
-    }
-
-    private bool TryGetContextIds(ChatContext context, out ulong guildId, out ulong channelId)
-    {
-        channelId = 0;
-        return ulong.TryParse(context.GuildId, out guildId) &&
-               ulong.TryParse(context.ChannelId, out channelId);
-    }
-
-    private bool TryGetChannel(ulong guildId, ulong channelId, out TextChannel channel)
-    {
-        channel = null!;
-
-        if (!gatewayClient.Cache.Guilds.TryGetValue(guildId, out var guild) ||
-            !guild.Channels.TryGetValue(channelId, out var genericChannel) ||
-            genericChannel is not TextChannel textChannel) return false;
-
-        channel = textChannel;
-        return true;
     }
 }
