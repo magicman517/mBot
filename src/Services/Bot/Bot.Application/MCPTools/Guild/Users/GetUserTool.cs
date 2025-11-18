@@ -13,7 +13,7 @@ public class GetUserTool(IGuildHelper guildHelper)
     [UsedImplicitly]
     [McpServerTool(Name = "guild_get_user"),
     Description("Get a user in a guild by their ID. " +
-                "Returns the user's ID, username, bot status, owner status, admin status, and join date.")]
+                "Returns the user's ID, username, roles, bot status, owner status, admin status, and join date.")]
     public async Task<ToolResult<UserDto>> GetUser(string guildId, string userId)
     {
         var guild = guildHelper.GetGuildById(guildId);
@@ -27,6 +27,7 @@ public class GetUserTool(IGuildHelper guildHelper)
             {
                 Id = user.Id.ToString(),
                 Username = user.Nickname ?? user.Username,
+                Roles = user.GetRoles(guild).Select(r => r.Id.ToString()).ToArray(),
                 IsBot = user.IsBot,
                 IsOwner = guild.OwnerId == user.Id,
                 IsAdmin = user.GetPermissions(guild).HasFlag(Permissions.Administrator),
